@@ -1,0 +1,66 @@
+# stdlib
+import io
+import zipfile
+from typing import Any, Dict, Optional, Tuple
+
+# 3rd party
+from requests.models import CaseInsensitiveDict
+
+class RemoteZipError(Exception): ...
+
+class OutOfBound(RemoteZipError): ...
+
+class RemoteIOError(RemoteZipError): ...
+
+class RangeNotSupported(RemoteZipError): ...
+
+class PartialBuffer:
+	buffer: Any
+	offset: int
+	size: int
+	position: int
+	stream: Any
+
+	def __init__(self, buffer: Any, offset, size, stream: bool) -> None: ...
+	def read(self, size: int = ...) -> bytes: ...
+	def close(self) -> None: ...
+	def seek(self, offset: int, whence: int) -> int: ...
+
+class RemoteIO(io.IOBase):
+	fetch_fun: Any
+	initial_buffer_size: Any
+	buffer: Any
+	file_size: int
+	position: Any
+	member_pos2size: Any
+
+	def __init__(self, fetch_fun, initial_buffer_size=...) -> None: ...
+	def set_pos2size(self, pos2size) -> None: ...
+	def read(self, size: int = ...): ...
+	def seek(self, offset, whence: int = ...): ...
+	def tell(self): ...
+	def close(self) -> None: ...
+
+class RemoteZip(zipfile.ZipFile):
+	kwargs: Dict[str, Any]
+	url: Any
+
+	def __init__(
+			self,
+			url: str,
+			initial_buffer_size: int = ...,
+			**kwargs: Any,
+			) -> None: ...
+
+	def get_position2size(self) -> Dict[int, int]: ...
+
+	@staticmethod
+	def make_buffer(io_buffer, content_range_header: str, stream) -> PartialBuffer: ...
+
+	@staticmethod
+	def make_header(range_min: int, range_max: Optional[int]) -> str: ...
+
+	@staticmethod
+	def request(url, range_header, kwargs) -> Tuple[Any, CaseInsensitiveDict]: ...
+
+	def fetch_fun(self, data_range: Tuple[int, Optional[int]], stream: bool = ...) -> PartialBuffer: ...
