@@ -44,8 +44,8 @@ remotezip-stubs
 	:target: https://github.com/repo-helper/remotezip-stubs/actions?query=workflow%3A%22mypy%22
 	:alt: mypy status
 
-.. |requires| image:: https://requires.io/github/repo-helper/remotezip-stubs/requirements.svg?branch=master
-	:target: https://requires.io/github/repo-helper/remotezip-stubs/requirements/?branch=master
+.. |requires| image:: https://dependency-dash.herokuapp.com/github/repo-helper/remotezip-stubs/badge.svg
+	:target: https://dependency-dash.herokuapp.com/github/repo-helper/remotezip-stubs/
 	:alt: Requirements Status
 
 .. |codefactor| image:: https://img.shields.io/codefactor/grade/github/repo-helper/remotezip-stubs?logo=codefactor
