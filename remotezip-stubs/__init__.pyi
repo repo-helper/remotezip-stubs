@@ -40,9 +40,13 @@ class RemoteIO(io.IOBase):
 	def close(self) -> None: ...
 
 class RemoteFetcher:
-	def __init__(
 
-			self, url: str, session: Session | None = ..., support_suffix_range: bool = ..., **kwargs
+	def __init__(
+			self,
+			url: str,
+			session: Session | None = ...,
+			support_suffix_range: bool = ...,
+			**kwargs,
 			) -> None: ...
 
 	@staticmethod
@@ -64,7 +68,7 @@ class RemoteZip(zipfile.ZipFile):
 			session: Session | None = ...,
 			fetcher=...,
 			support_suffix_range: bool = ...,
-			**kwargs
+			**kwargs,
 			) -> None: ...
 
 	def size(self) -> int: ...
